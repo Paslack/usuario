@@ -1,7 +1,7 @@
 package com.phc.usuario.controller;
 
 import com.phc.usuario.business.dto.UsuarioDTO;
-import com.phc.usuario.business.sevice.UsuarioService;
+import com.phc.usuario.business.service.UsuarioService;
 import com.phc.usuario.infrastructure.entity.Usuario;
 import com.phc.usuario.infrastructure.security.JwtUtil;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +45,10 @@ public class UsuarioController {
     public ResponseEntity<Void> deletarUsuarioPorEmail(@PathVariable String email) {
         usuarioService.deletarUsuarioPorEmail(email);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<UsuarioDTO> atualizaDadosUsuario(@RequestHeader("Authorization") String token, @RequestBody UsuarioDTO dto) {
+        return ResponseEntity.ok(usuarioService.atualizaDadosUsuario(token, dto));
     }
 }
