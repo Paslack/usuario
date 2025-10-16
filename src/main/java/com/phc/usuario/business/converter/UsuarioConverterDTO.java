@@ -43,11 +43,11 @@ public class UsuarioConverterDTO {
 
 
     public List<TelefoneDTO> paraListaTelefoneDTO(List<Telefone> telefone) {
-        return telefone.stream().map(this::paraListaTelefoneDTO)
+        return telefone.stream().map(this::paraTelefoneDTO)
                 .collect(Collectors.toList());
     }
 
-    public TelefoneDTO paraListaTelefoneDTO(Telefone telefone) {
+    public TelefoneDTO paraTelefoneDTO(Telefone telefone) {
         return TelefoneDTO.builder()
                 .id(telefone.getId())
                 .numero(telefone.getNumero())
