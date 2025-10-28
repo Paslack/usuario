@@ -30,6 +30,22 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
+        String path = request.getRequestURI();
+
+        // Ignorar caminhos públicos
+        if (path.startsWith("/v3/api-docs") ||
+                path.startsWith("/swagger-ui") ||
+                path.startsWith("/swagger-resources") ||
+                path.startsWith("/webjars") ||
+                path.startsWith("/configuration") ||
+                path.equals("/usuario/login") ||
+                (path.equals("/usuario") && request.getMethod().equals("POST")) ||
+                path.startsWith("/usuario/endereco")) {
+
+            chain.doFilter(request, response);
+            return;
+        }
+
         // Obtém o valor do header "Authorization" da requisição
         final String authorizationHeader = request.getHeader("Authorization");
 

@@ -4,6 +4,8 @@ import com.phc.usuario.business.dto.EnderecoDTO;
 import com.phc.usuario.business.dto.TelefoneDTO;
 import com.phc.usuario.business.dto.UsuarioDTO;
 import com.phc.usuario.business.service.UsuarioService;
+import com.phc.usuario.business.service.ViaCepService;
+import com.phc.usuario.infrastructure.client.ViaCepDTO;
 import com.phc.usuario.infrastructure.security.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +19,13 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final ViaCepService viaCepService;
 
-    public UsuarioController(UsuarioService usuarioService, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public UsuarioController(UsuarioService usuarioService, AuthenticationManager authenticationManager, JwtUtil jwtUtil, ViaCepService viaCepService) {
         this.usuarioService = usuarioService;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
+        this.viaCepService = viaCepService;
     }
 
     @PostMapping
@@ -73,4 +77,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.cadastroTelefone(token, telefoneDTO));
     }
 
+    @GetMapping("/endereco/{cep}")
+    public ResponseEntity<ViaCepDTO> buscarDadosCep(@PathVariable("cep") String cep) {
+        return ResponseEntity.ok(viaCepService.buscarEnderecoPorCep(cep));
+    }
 }
