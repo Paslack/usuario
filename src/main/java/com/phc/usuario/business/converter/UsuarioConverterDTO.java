@@ -9,7 +9,6 @@ import com.phc.usuario.infrastructure.entity.Usuario;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class UsuarioConverterDTO {
@@ -25,8 +24,7 @@ public class UsuarioConverterDTO {
     }
 
     public List<EnderecoDTO> paraListaEnderecoDTO(List<Endereco> endereco) {
-        return endereco.stream().map(this::paraEnderecoDTO)
-                .collect(Collectors.toList());
+        return endereco.stream().map(this::paraEnderecoDTO).toList();
     }
 
     public EnderecoDTO paraEnderecoDTO(Endereco endereco) {
@@ -43,8 +41,8 @@ public class UsuarioConverterDTO {
 
 
     public List<TelefoneDTO> paraListaTelefoneDTO(List<Telefone> telefone) {
-        return telefone.stream().map(this::paraTelefoneDTO)
-                .collect(Collectors.toList());
+        return telefone.stream().map(this::paraTelefoneDTO).toList();
+
     }
 
     public TelefoneDTO paraTelefoneDTO(Telefone telefone) {

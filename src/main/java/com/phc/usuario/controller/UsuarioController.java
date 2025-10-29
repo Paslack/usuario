@@ -6,12 +6,10 @@ import com.phc.usuario.business.dto.UsuarioDTO;
 import com.phc.usuario.business.service.UsuarioService;
 import com.phc.usuario.business.service.ViaCepService;
 import com.phc.usuario.infrastructure.client.ViaCepDTO;
-import com.phc.usuario.infrastructure.security.JwtUtil;
 import com.phc.usuario.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,14 +18,10 @@ import org.springframework.web.bind.annotation.*;
 @SecurityRequirement(name = SecurityConfig.SECURITY_SCHEME)
 public class UsuarioController {
     private final UsuarioService usuarioService;
-    private final AuthenticationManager authenticationManager;
-    private final JwtUtil jwtUtil;
     private final ViaCepService viaCepService;
 
-    public UsuarioController(UsuarioService usuarioService, AuthenticationManager authenticationManager, JwtUtil jwtUtil, ViaCepService viaCepService) {
+    public UsuarioController(UsuarioService usuarioService, ViaCepService viaCepService) {
         this.usuarioService = usuarioService;
-        this.authenticationManager = authenticationManager;
-        this.jwtUtil = jwtUtil;
         this.viaCepService = viaCepService;
     }
 
