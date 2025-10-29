@@ -4,6 +4,9 @@ package com.phc.usuario.infrastructure.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -11,7 +14,10 @@ import lombok.*;
 @Entity
 @Table(name = "tb_endereco")
 @Builder
-public class Endereco {
+public class Endereco implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

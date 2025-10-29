@@ -9,7 +9,6 @@ import com.phc.usuario.infrastructure.entity.Usuario;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class UsuarioConverter {
@@ -26,8 +25,7 @@ public class UsuarioConverter {
 
      // Converte os dados da Lista DTO para uma Lista da Entidade Endereços
      public List<Endereco> paraListaEndereco(List<EnderecoDTO> enderecoDTOS) {
-         return enderecoDTOS.stream().map(this::paraEndereco)
-                 .collect(Collectors.toList());
+         return enderecoDTOS.stream().map(this::paraEndereco).toList();
      }
 
 
@@ -46,8 +44,7 @@ public class UsuarioConverter {
 
      // Converte os dados da Lista DTO para uma Lista da Entidade Telefone
      public List<Telefone> paraListaTelefone(List<TelefoneDTO> telefoneDTOS) {
-         return telefoneDTOS.stream().map(this::paraTelefone)
-                 .collect(Collectors.toList());
+         return telefoneDTOS.stream().map(this::paraTelefone).toList();
      }
 
      // Seta os atributos de DTO para Entidade Telefone
@@ -78,6 +75,7 @@ public class UsuarioConverter {
                  .complemento(enderecoDTO.getComplemento() != null ? enderecoDTO.getComplemento() : enderecoEntity.getComplemento())
                  .rua(enderecoDTO.getRua() != null ? enderecoDTO.getRua() : enderecoEntity.getRua())
                  .numero(enderecoDTO.getNumero() != null ? enderecoDTO.getNumero() : enderecoEntity.getNumero())
+                 .usuario_id(enderecoEntity.getUsuario_id())
                  .build();
      }
 
@@ -86,6 +84,7 @@ public class UsuarioConverter {
                  .id(telefoneEntity.getId())
                  .ddd(telefoneDTO.getDdd() != null ? telefoneDTO.getDdd() : telefoneEntity.getDdd())
                  .numero(telefoneDTO.getNumero() != null ? telefoneDTO.getNumero() : telefoneEntity.getNumero())
+                 .usuario_id(telefoneEntity.getUsuario_id())
                  .build();
      }
 
